@@ -36,6 +36,7 @@ export default function Home() {
       <h1 className={`text-3xl font-bold text-center ${jac.className}`}>Book Recommender</h1>
       {/* Q1: Favorite book */}
       <div>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
         <label className='text-sm'>1) What is your favorite book and why? (important to properly answer why - doesn't have to be too detailed, dont worry)</label>
         
         <textarea
@@ -58,6 +59,7 @@ export default function Home() {
       </div>
       {/* Q2: Genre */}
       <div>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
         <label className='text-sm'>2) Preferred genre (or "no" if not applicable):</label>
         <input
           className="w-full border-b-4 p-2 rounded"
