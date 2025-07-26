@@ -3,7 +3,7 @@
 'use client';
 import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import Frame from '@/app/components/Frame';
-import { useRecs } from '../layout';
+import { useRecs } from '../context';
 
 export default function RecPage() {
   const { index } = useParams();               

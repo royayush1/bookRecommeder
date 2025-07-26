@@ -4,6 +4,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { PacmanLoader } from 'react-spinners';
+import RecsContext, {useRecs} from './context';
 
 interface Recommendation {
     title: string;
@@ -12,12 +13,7 @@ interface Recommendation {
     reason:  string;
 }
 
-const RecsContext = createContext<Recommendation[] | null>(null);
-export function useRecs(){
-    const ctx = useContext(RecsContext)
-    if (!ctx) throw new Error('useRecs must be inside RecommendationsLayout');
-    return ctx
-}
+
 
 export default function RecommendationsLayout({children}: {children: ReactNode}){
     const router = useRouter()
