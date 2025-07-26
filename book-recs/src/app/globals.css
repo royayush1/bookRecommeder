@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.outer-border {
+  border: 2px solid #DE9B72;
+  padding: 6px;
+  box-sizing: border-box;
+  z-index: 99;
+}
+
+.mid-border {
+  border: 6px solid #DE9B72;
+  padding: 6px;
+  box-sizing: border-box;
+  z-index: 99;
+}
+
+.inner-border {
+  border: 2px solid #DE9B72;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.corner-decoration {
+  position: absolute;
+  width: 3em;
+  z-index: 1;
+}
+
+.corner-decoration.corner-left-top {
+  top: 0;
+  left: 0;
+}
+
+.corner-decoration.corner-right-top {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.corner-decoration.corner-right-bottom {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.corner-decoration.corner-left-bottom {
+  bottom: 0;
+  left: 0;
+  transform: scaleY(-1);
+}
+
+.vertical-decoration {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11em;
+  z-index: 1;
+}
+.vertical-decoration.top {
+  top: 0;
+}
+.vertical-decoration.bottom {
+  bottom: 0;
+  transform: translateX(-50%) scaleY(-1);
+}
