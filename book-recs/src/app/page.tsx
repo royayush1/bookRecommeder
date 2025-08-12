@@ -31,8 +31,8 @@ export default function Home() {
   };
   return (
     <Frame>
-    <div className='h-screen w-full bg-red-900'>
-    <div className="h-full w-full mx-auto p-6 space-y-4">
+    <div className='min-h-[100svh] w-full bg-red-900'>
+    <div className="w-full mx-auto p-6 space-y-4">
       <h1 className={`text-3xl font-bold text-center ${jac.className}`}>Book Recommender</h1>
       {/* Q1: Favorite book */}
       <div>

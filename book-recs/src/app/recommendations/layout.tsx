@@ -4,14 +4,8 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { PacmanLoader } from 'react-spinners';
-import RecsContext, {useRecs} from './context';
+import RecsContext, {Recommendation} from './context';
 
-interface Recommendation {
-    title: string;
-    author: string;
-    cover_url: string;
-    reason:  string;
-}
 
 
 
