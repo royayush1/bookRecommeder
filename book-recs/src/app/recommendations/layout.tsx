@@ -26,10 +26,12 @@ export default function RecommendationsLayout({children}: {children: ReactNode})
                         headers: { 'Content-Type': 'application/json' },
                         body:    JSON.stringify({
                             book:     qs.book,
+                            reason:   qs.reason,
                             genre:    qs.genre,
                             era:      qs.era,
                             feelings: qs.feelings.split(','),
-                            count:    Number(qs.count)
+                            count:    Number(qs.count),
+                            excludeSameSeries: qs.excludeSameSeries
                         })
                     });
                 if (!resp.ok) throw new Error(`Server returned ${resp.status}`)

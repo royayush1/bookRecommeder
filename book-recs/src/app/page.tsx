@@ -13,19 +13,21 @@ const jac = Jacquard_12({
   
 })
 
-type Answers = { book: string; genre: string; era: 'New' | 'Classic'; feelings: string[]; count: number };
+type Answers = { book: string; reason: string; genre: string; era: 'New' | 'Classic'; feelings: string[]; count: number; excludeSameSeries: boolean };
 
 export default function Home() {
   const router = useRouter();
-  const [ans, setAns] = useState<Answers>({ book: '', genre: '', era: 'New', feelings: [], count: 3 });
+  const [ans, setAns] = useState<Answers>({ book: '',reason: '', genre: '', era: 'New', feelings: [], count: 3, excludeSameSeries: true });
   const toggleFeeling = (f: string) => setAns(a => ({ ...a, feelings: a.feelings.includes(f) ? a.feelings.filter(x => x !== f) : [...a.feelings, f] }));
   const submit = () => {
     const qs = new URLSearchParams({
       book: ans.book,
+      reason: ans.reason,
       genre: ans.genre,
       era: ans.era,
       feelings: ans.feelings.join(','),
-      count: ans.count.toString()
+      count: ans.count.toString(),
+      excludeSameSeries: String(ans.excludeSameSeries)
     }).toString();
     router.push(`/recommendations/0?${qs}`);
   };
@@ -37,10 +39,32 @@ export default function Home() {
       {/* Q1: Favorite book */}
       <div>
         {/* eslint-disable-next-line react/no-unescaped-entities */}
-        <label className='text-sm'>1) What is your favorite book and why? (important to properly answer why - doesn't have to be too detailed, dont worry)</label>
+        <label className='text-sm'>1) What is your favorite book?</label>
         
         <textarea
           id="fav-book"
+          rows={1}
+          className="
+            w-full         /* full width */
+            border         /* border around */
+            p-2            /* padding inside */
+            rounded        /* rounded corners */
+            resize-none    /* disable user‐resize, optional */
+            whitespace-normal  /* wrap text normally */
+            break-words        /* break long words rather than scroll */
+            mt-2
+          "
+          placeholder="e.g. Dune by Frank Herbert"
+          value={ans.book}
+          onChange={e => setAns(a => ({ ...a, book: e.target.value }))}
+        />
+      </div>
+      <div>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <label className='text-sm'>Why is it your favorite? (important to properly answer why - doesn't have to be too detailed, dont worry)</label>
+        
+        <textarea
+          id="reason"
           rows={3}
           className="
             w-full         /* full width */
@@ -52,9 +76,9 @@ export default function Home() {
             break-words        /* break long words rather than scroll */
             mt-2
           "
-          placeholder="e.g. Dune by Frank Herbert — I love its sandworm lore and political intrigue…"
-          value={ans.book}
-          onChange={e => setAns(a => ({ ...a, book: e.target.value }))}
+          placeholder="e.g. I love its sandworm lore and political intrigue…"
+          value={ans.reason}
+          onChange={e => setAns(a => ({ ...a, reason: e.target.value }))}
         />
       </div>
       {/* Q2: Genre */}
@@ -109,6 +133,16 @@ export default function Home() {
           value={ans.count}
           onChange={e => setAns(a => ({ ...a, count: Number(e.target.value) }))}
         />
+      </div>
+      <div className='flex items-center space-x-4'>
+        <input
+          id='excludeSeries'
+          type='checkbox'
+          checked={ans.excludeSameSeries}
+          onChange={e => setAns(a => ({...a, excludeSameSeries: e.target.checked}))}/>
+        <label htmlFor='excludeSeries' className='text-sm'>
+          Exclude books from the same series?
+        </label>
       </div>
       <button
         onClick={submit}
